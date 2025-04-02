@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { YTService } from "../service/api.service";
 import { VideoType } from "../types";
@@ -99,7 +99,10 @@ const VideoDetails = () => {
           }}
         ></p>
         {!expand && (
-          <div onClick={() =>setExpand(true)} className="absolute py-1 left-0 bottom-0 right-0 w-full bg-gradient-to-t from-[#1D202A] from-30% to-transparent text-center">
+          <div
+            onClick={() => setExpand(true)}
+            className="absolute py-1 left-0 bottom-0 right-0 w-full bg-gradient-to-t from-[#1D202A] from-30% to-transparent text-center"
+          >
             <i className="fa fa-chevron-down"></i>
           </div>
         )}

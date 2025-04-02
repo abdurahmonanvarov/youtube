@@ -1,4 +1,3 @@
-import React from "react";
 import { VideoType } from "../types";
 import { Link } from "react-router-dom";
 
@@ -8,14 +7,14 @@ interface PropsTypes {
 
 const VideoCard: React.FC<PropsTypes> = ({ video }) => {
   const ConvertViews = (views: number) => {
-    if(views >= 1000000){
-      return `${(views / 1000000).toFixed(1)}M`
-    }else if(views >= 1000 && views < 1000000){
-      return `${(views / 1000).toFixed(1)}K`
-    }else{
-      return views
+    if (views >= 1000000) {
+      return `${(views / 1000000).toFixed(1)}M`;
+    } else if (views >= 1000 && views < 1000000) {
+      return `${(views / 1000).toFixed(1)}K`;
+    } else {
+      return views;
     }
-  }
+  };
 
   return (
     <Link to={`/videos/${video.video_id}`}>
