@@ -24,8 +24,10 @@ const Burger: React.FC<BurgerMenuProps> = ({ isOpen, onClose }) => {
           <Link to="/like" className="cursor-pointer hover:text-red-500">
             Loked
           </Link>
-          <li className="cursor-pointer hover:text-red-500">Subscriptions</li>
-          <li className="cursor-pointer hover:text-red-500">Added</li>
+          <Link to="/added" className="cursor-pointer hover:text-red-500">
+            Added
+          </Link>
+          <li className="cursor-pointer hover:text-red-500"> Subscriptions</li>
         </ul>
       </nav>
     </div>

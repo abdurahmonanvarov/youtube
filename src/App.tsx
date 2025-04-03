@@ -5,6 +5,7 @@ import { setError, setIsLoading, setVideos } from "./redux/slices/productSlice";
 import { videos } from "./mock-data";
 import { Home, Navbar, VideoDetails } from "./components";
 import Like from "./components/Like";
+import Added from "./components/Added";
 // import { YTService } from "./service/api.service";
 
 const App = () => {
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/videos/:id" element={<VideoDetails />} />
         <Route path="/like" element={<Like />} />
+        <Route path="/added" element={<Added />} />
       </Routes>
     </div>
   );
