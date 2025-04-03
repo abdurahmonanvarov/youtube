@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { setError, setIsLoading, setVideos } from "./redux/slices/productSlice";
 import { videos } from "./mock-data";
 import { Home, Navbar, VideoDetails } from "./components";
+import Like from "./components/Like";
 // import { YTService } from "./service/api.service";
 
 const App = () => {
@@ -30,10 +31,11 @@ const App = () => {
   }, []);
   return (
     <div className="min-h-screen bg-gray-950 text-white">
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/videos/:id" element={<VideoDetails/>}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/videos/:id" element={<VideoDetails />} />
+        <Route path="/like" element={<Like />} />
       </Routes>
     </div>
   );

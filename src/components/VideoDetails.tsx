@@ -4,6 +4,11 @@ import { YTService } from "../service/api.service";
 import { VideoType } from "../types";
 import { useDispatch } from "react-redux";
 import { setError, setIsLoading } from "../redux/slices/productSlice";
+import { motion } from "framer-motion";
+import { AiFillLike } from "react-icons/ai";
+import { IoMdAddCircle } from "react-icons/io";
+import { FiDownload } from "react-icons/fi";
+import { MdSubscriptions } from "react-icons/md";
 
 const VideoDetails = () => {
   const { id } = useParams();
@@ -29,6 +34,12 @@ const VideoDetails = () => {
 
     getVideoDetails();
   }, [id]);
+  const handleSaveToLocalStorage = (key: string) => {
+    if (id) {
+      localStorage.setItem(key, id);
+      console.log(`${key} saved: ${id}`);
+    }
+  };
   const ConvertViews = (views: number) => {
     if (views >= 1000000) {
       return `${(views / 1000000).toFixed(1)}M`;
@@ -37,6 +48,12 @@ const VideoDetails = () => {
     } else {
       return views;
     }
+  };
+  const icons = {
+    Like: <AiFillLike size={20} />,
+    Add: <IoMdAddCircle size={20} />,
+    Download: <FiDownload size={20} />,
+    Subscribe: <MdSubscriptions size={20} />,
   };
 
   const textToLink = (text: string) => {
@@ -76,9 +93,24 @@ const VideoDetails = () => {
             className="w-12 aspect-square object-cover rounded-full"
             alt="channel img"
           />
-          <div>
-            <p className="text-lg font-bold">{video?.author}</p>
-            <span className="text-sm opacity-70">1.92M followers</span>
+          <div className="flex justify-between gap-14 items-center">
+            <div>
+              <p className="text-lg font-bold">{video?.author}</p>
+              <span className="text-sm opacity-70">1.92M followers</span>
+            </div>
+            <div className="flex gap-6 p-4">
+              {["Like", "Add", "Download", "Subscribe"].map((text, index) => (
+                <motion.button
+                  key={index}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => handleSaveToLocalStorage(text)}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md cursor-pointer hover:bg-blue-600"
+                >
+                  {icons[text]} {text}
+                </motion.button>
+              ))}
+            </div>
           </div>
         </div>
       </div>

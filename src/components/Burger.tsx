@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface BurgerMenuProps {
   isOpen: boolean;
   onClose: () => void;
@@ -15,12 +17,15 @@ const Burger: React.FC<BurgerMenuProps> = ({ isOpen, onClose }) => {
       </button>
 
       <nav className="mt-12">
-        <ul className="text-white text-lg space-y-4 px-6">
-          <li className="cursor-pointer hover:text-red-500">Home</li>
-          <li className="cursor-pointer hover:text-red-500">Trending</li>
+        <ul className="text-white flex flex-col text-lg space-y-4 px-6">
+          <Link to="/" className="cursor-pointer hover:text-red-500">
+            Home
+          </Link>
+          <Link to="/like" className="cursor-pointer hover:text-red-500">
+            Loked
+          </Link>
           <li className="cursor-pointer hover:text-red-500">Subscriptions</li>
-          <li className="cursor-pointer hover:text-red-500">Library</li>
-          <li className="cursor-pointer hover:text-red-500">History</li>
+          <li className="cursor-pointer hover:text-red-500">Added</li>
         </ul>
       </nav>
     </div>
