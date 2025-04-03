@@ -8,14 +8,26 @@ const Added = () => {
   const { videos } = useSelector((state: RootState) => state.videos); // Redux-dan videos olish
 
   useEffect(() => {
-    const storedIds = JSON.parse(localStorage.getItem("Add") || "[]"); // LocalStorage'dan Add id larini olish
+    const storedId = localStorage.getItem("Add"); // LocalStorage'dan Add id olish
 
-    if (storedIds.length > 0) {
-      // Saqlangan id'lar asosida videolarni filtrlash
-      const filteredVideos = videos.filter((video) =>
-        storedIds.includes(video.video_id)
-      );
-      setAddVideos(filteredVideos); // Filtrlangan videolarni addVideos ga qo'shish
+    if (storedId) {
+      try {
+        // Noto'g'ri JSON formatida bo'lishi mumkin, shuning uchun try-catch qo'shamiz
+        const parsedStoredId = JSON.parse(storedId);
+
+        if (Array.isArray(parsedStoredId)) {
+          // Redux'dagi videos bilan storedId ni taqqoslaymiz
+          const filteredVideos = videos?.filter((video) =>
+            parsedStoredId.includes(video.video_id)
+          );
+          setAddVideos(filteredVideos || []); // Agar mos video bo'lsa, uni addVideos ga qo'shamiz
+        } else {
+          console.error("Stored ID is not an array.");
+        }
+      } catch (error) {
+        console.error("Failed to parse stored ID:", error);
+        setAddVideos([]); // Xatolik bo'lsa, bo'sh ro'yxat qaytarish
+      }
     }
   }, [videos]); // videos o'zgarganda qayta ishlaydi
 
