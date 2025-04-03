@@ -1,25 +1,23 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
-import { YTService } from "../service/api.service";
 import { VideoType } from "../types";
 
 const Like = () => {
   const [likedVideos, setLikedVideos] = useState<VideoType[]>([]);
+  const { videos } = useSelector((state: RootState) => state.videos); // Redux'dan videos olish
 
   useEffect(() => {
-    const fetchLikedVideos = async () => {
-      const storedId = localStorage.getItem("Like"); // LocalStorage-dan ID olish
-      if (storedId) {
-        try {
-          const data = await YTService.getVideoDetails(storedId);
-          setLikedVideos([data]); // Bitta video bo‘lgani uchun array sifatida saqlaymiz
-        } catch (error) {
-          console.error("Error fetching liked videos:", error);
-        }
-      }
-    };
+    const storedIds = JSON.parse(localStorage.getItem("Like") || "[]"); // LocalStorage'dan Like id larini olish
 
-    fetchLikedVideos();
-  }, []);
+    if (storedIds.length > 0) {
+      // Saqlangan id'lar asosida videolarni filtrlash
+      const filteredVideos = videos.filter((video) =>
+        storedIds.includes(video.video_id)
+      );
+      setLikedVideos(filteredVideos); // Filtrlangan videolarni likedVideos ga qo'shish
+    }
+  }, [videos]); // videos o'zgarganda qayta ishlaydi
 
   return (
     <div className="container py-10">

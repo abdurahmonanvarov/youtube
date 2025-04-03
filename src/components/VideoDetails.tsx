@@ -36,10 +36,20 @@ const VideoDetails = () => {
   }, [id]);
   const handleSaveToLocalStorage = (key: string) => {
     if (id) {
-      localStorage.setItem(key, id);
-      console.log(`${key} saved: ${id}`);
+      // LocalStorage'dan eski ro'yxatni olish
+      const savedIds = JSON.parse(localStorage.getItem(key) || "[]");
+
+      // Yangi idni ro'yxatga qo'shish, agar u allaqachon bo'lmasa
+      if (!savedIds.includes(id)) {
+        savedIds.push(id);
+        localStorage.setItem(key, JSON.stringify(savedIds));
+        console.log(`${key} saved: ${id}`);
+      } else {
+        console.log(`${id} already exists in localStorage.`);
+      }
     }
   };
+
   const ConvertViews = (views: number) => {
     if (views >= 1000000) {
       return `${(views / 1000000).toFixed(1)}M`;
