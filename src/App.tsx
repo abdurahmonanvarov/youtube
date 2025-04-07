@@ -6,6 +6,7 @@ import { videos } from "./mock-data";
 import { Home, Navbar, VideoDetails } from "./components";
 import Like from "./components/Like";
 import Added from "./components/Added";
+import Subscribe from "./components/Subscribe";
 // import { YTService } from "./service/api.service";
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/videos/:id" element={<VideoDetails />} />
         <Route path="/like" element={<Like />} />
         <Route path="/added" element={<Added />} />
+        <Route path="/subscribe" element={<Subscribe />} />
       </Routes>
     </div>
   );

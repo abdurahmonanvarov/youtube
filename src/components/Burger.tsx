@@ -16,20 +16,64 @@ const Burger: React.FC<BurgerMenuProps> = ({ isOpen, onClose }) => {
         <i className="fa fa-times text-2xl"></i>
       </button>
 
-      <nav className="mt-12">
-        <ul className="text-white flex flex-col text-lg space-y-4 px-6">
-          <Link to="/" className="cursor-pointer hover:text-red-500">
-            Home
-          </Link>
-          <Link to="/like" className="cursor-pointer hover:text-red-500">
-            Loked
-          </Link>
-          <Link to="/added" className="cursor-pointer hover:text-red-500">
-            Added
-          </Link>
-          <li className="cursor-pointer hover:text-red-500"> Subscriptions</li>
-        </ul>
-      </nav>
+      <div className="px-6 py-6">
+        <div className="flex items-center gap-2">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png"
+            alt="YouTube Logo"
+            className="w-10"
+          />
+          <h2 className="text-white text-lg font-bold">YouTube</h2>
+        </div>
+
+        <nav className="mt-6">
+          <ul className="text-white flex flex-col text-lg space-y-4">
+            <Link
+              to="/"
+              className="cursor-pointer hover:text-red-500 flex items-center gap-4"
+              onClick={onClose}
+            >
+              <i className="fa fa-home text-xl"></i>
+              Home
+            </Link>
+            <Link
+              to="/like"
+              className="cursor-pointer hover:text-red-500 flex items-center gap-4"
+              onClick={onClose}
+            >
+              <i className="fa fa-thumbs-up text-xl"></i>
+              Liked
+            </Link>
+            <Link
+              to="/added"
+              className="cursor-pointer hover:text-red-500 flex items-center gap-4"
+              onClick={onClose}
+            >
+              <i className="fa fa-plus-circle text-xl"></i>
+              Added
+            </Link>
+            <Link
+              to="/subscribe"
+              className="cursor-pointer hover:text-red-500 flex items-center gap-4"
+            >
+              <i className="fa fa-bell text-xl"></i>
+              Subscriptions
+            </Link>
+          </ul>
+        </nav>
+
+        {/* YouTube logo va account */}
+        <div className="absolute bottom-0 left-0 p-6 w-full">
+          <div className="cursor-pointer text-white flex items-center gap-4 hover:text-red-500">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/4/44/YouTube_icon_%282013-2017%29.png"
+              alt="User Avatar"
+              className="w-8 h-8 rounded-full"
+            />
+            <span className="text-sm">Your Account</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

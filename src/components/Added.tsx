@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
 import { VideoType } from "../types";
+import { Link } from "react-router-dom";
 
 const Added = () => {
   const [addVideos, setAddVideos] = useState<VideoType[]>([]);
@@ -36,7 +37,11 @@ const Added = () => {
       <h2 className="text-xl font-bold mb-4">Added Videos</h2>
       {addVideos.length > 0 ? (
         addVideos.map((video) => (
-          <div key={video.video_id} className="flex gap-4 border-b py-4">
+          <Link
+            key={video.video_id}
+            to={`/videos/${video.video_id}`}
+            className="flex gap-4 border-b py-4 hover:bg-gray-500 rounded-lg transition-all"
+          >
             <img
               src={video.thumbnails[0].url}
               alt={video.title}
@@ -49,7 +54,7 @@ const Added = () => {
                 {video.number_of_views} views - {video.published_time}
               </p>
             </div>
-          </div>
+          </Link>
         ))
       ) : (
         <p className="text-gray-400">No added videos yet.</p>

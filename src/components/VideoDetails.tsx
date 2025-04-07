@@ -9,12 +9,14 @@ import { AiFillLike } from "react-icons/ai";
 import { IoMdAddCircle } from "react-icons/io";
 import { FiDownload } from "react-icons/fi";
 import { MdSubscriptions } from "react-icons/md";
+import RecommendedVideos from "./RecommendedVideos ";
 
 const VideoDetails = () => {
   const { id } = useParams();
   const [video, setVideo] = useState<VideoType | null>(null);
   const dispatch = useDispatch();
   const [expand, setExpand] = useState(false);
+
   useEffect(() => {
     const getVideoDetails = async () => {
       if (id) {
@@ -22,7 +24,6 @@ const VideoDetails = () => {
         try {
           const data = await YTService.getVideoDetails(id);
           setVideo(data);
-          console.log(data);
         } catch (error) {
           console.log(error);
           dispatch(setError("Wrong ID"));
@@ -43,7 +44,6 @@ const VideoDetails = () => {
       if (!savedIds.includes(id)) {
         savedIds.push(id);
         localStorage.setItem(key, JSON.stringify(savedIds));
-        console.log(`${key} saved: ${id}`);
       } else {
         console.log(`${id} already exists in localStorage.`);
       }
@@ -76,7 +76,6 @@ const VideoDetails = () => {
         res.push(tt[i]);
       }
     }
-    console.log(res);
     return res.join(" ");
   };
 
@@ -93,7 +92,10 @@ const VideoDetails = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className="w-[300px] border border-slate-700 rounded flex-shrink-0"></div>
+        <div className="w-[300px] border border-slate-700 rounded flex-shrink-0">
+          <h3 className="text-lg font-bold ml-3 mb-2">Recommended Videos</h3>
+          <RecommendedVideos />
+        </div>
       </div>
       <div className="mt-3">
         <h2 className="text-xl font-bold">{video?.title}</h2>

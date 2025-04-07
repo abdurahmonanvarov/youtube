@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useEffect, useState } from "react";
 import { VideoType } from "../types";
+import { Link } from "react-router-dom";
 
 const Like = () => {
   const [likedVideos, setLikedVideos] = useState<VideoType[]>([]);
@@ -24,7 +25,11 @@ const Like = () => {
       <h2 className="text-xl font-bold mb-4">Liked Videos</h2>
       {likedVideos.length > 0 ? (
         likedVideos.map((video) => (
-          <div key={video.video_id} className="flex gap-4 border-b py-4">
+          <Link
+            to={`/videos/${video.video_id}`}
+            key={video.video_id}
+            className="flex gap-4 border-b py-4 hover:bg-gray-500 transition-normal"
+          >
             <img
               src={video.thumbnails[0].url}
               alt={video.title}
@@ -37,7 +42,7 @@ const Like = () => {
                 {video.number_of_views} views - {video.published_time}
               </p>
             </div>
-          </div>
+          </Link>
         ))
       ) : (
         <p className="text-gray-400">No liked videos yet.</p>
